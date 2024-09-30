@@ -9,7 +9,7 @@ local function hideFarParts()
             local distance = (part.Position - character.HumanoidRootPart.Position).magnitude
             
             if distance > range then
-                part.Transparency = 1 -- Hide part (set transparency to 1)
+                part.Transparency = 0 -- Hide part (set transparency to 1)
                 part.CanCollide = false -- Disable collisions to improve performance
             else
                 part.Transparency = 0 -- Show part again if within range
