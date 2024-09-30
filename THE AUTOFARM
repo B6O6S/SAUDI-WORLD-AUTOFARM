@@ -1,20 +1,28 @@
+-- List of script URLs to be executed in order
 local scripts = {
-    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Void%20protection', -- Script 1
-    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Hide%20screen', -- Script 2
-    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Fall%20in%20the%20void', -- Script 3
-    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Antiafk', -- Script 4
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Notification%20to%20jodev', -- Script 1 (executed first)
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Void%20protection', -- Script 2
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Hide%20screen', -- Script 3
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Fall%20in%20the%20void', -- Script 4
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Antiafk' -- Script 5
 }
 
--- Execute each script once
-for _, url in ipairs(scripts) do
-    local success, result = pcall(function()
-        local script = game:HttpGet(url)
-        loadstring(script)()
-    end)
+-- Function to execute each script once
+local function executeScripts()
+    for _, url in ipairs(scripts) do
+        local success, result = pcall(function()
+            local script = game:HttpGet(url) -- Fetch the script content
+            loadstring(script)() -- Execute the script
+        end)
 
-    if not success then
-        warn("Error loading script from " .. url .. ": " .. result)
+        -- Log an error message if the script fails to load or execute
+        if not success then
+            warn("Error loading script from " .. url .. ": " .. result)
+        end
+        
+        wait(2) -- Wait for 2 seconds before executing the next script
     end
-    
-    wait(2) -- Wait for 2 seconds before executing the next script
 end
+
+-- Call the function to execute the scripts
+executeScripts()
