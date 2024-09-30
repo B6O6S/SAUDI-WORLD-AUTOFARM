@@ -1,0 +1,17 @@
+local player = game.Players.LocalPlayer
+
+-- Function to kick the player when they die
+local function onDeath()
+    player:Kick("حدث خطأ ")
+end
+
+-- Connect the function to the player's Character's Humanoid.Died event
+player.CharacterAdded:Connect(function(character)
+    local humanoid = character:WaitForChild("Humanoid")
+    humanoid.Died:Connect(onDeath)
+end)
+
+-- If the player's character already exists when the script runs
+if player.Character then
+    player.Character:WaitForChild("Humanoid").Died:Connect(onDeath)
+end
