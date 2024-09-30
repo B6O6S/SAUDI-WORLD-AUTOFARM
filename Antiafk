@@ -1,0 +1,25 @@
+-- Anti-AFK Script
+local player = game.Players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+
+local function preventAFK()
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    while true do
+        if humanoid.Health > 0 then
+            -- Move the character slightly to prevent AFK kick
+            humanoid:Move(Vector3.new(0, 0, 0), false)
+        end
+        wait(60) -- Adjust the wait time if needed
+    end
+end
+
+-- Check for user input to ensure they are not AFK
+userInputService.InputBegan:Connect(function()
+    preventAFK()
+end)
+
+-- Start the anti-AFK process
+preventAFK()
