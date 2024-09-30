@@ -1,0 +1,7 @@
+local StarterGui = game:GetService("StarterGui")
+
+StarterGui:SetCore("SendNotification", {
+    Title = "To JoDev"; -- The title of the notification
+    Text = "YOUR COOKED WITH THIS ONE"; -- The body of the notification
+    Duration = 5; -- Time the notification will stay (in seconds)
+})
