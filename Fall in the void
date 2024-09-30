@@ -1,0 +1,26 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local range = 10 -- Adjust this range as needed
+
+-- Function to check distance and hide far parts
+local function hideFarParts()
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") and part.Parent ~= character then
+            local distance = (part.Position - character.HumanoidRootPart.Position).magnitude
+            
+            if distance > range then
+                part.Transparency = 1 -- Hide part (set transparency to 1)
+                part.CanCollide = false -- Disable collisions to improve performance
+            else
+                part.Transparency = 0 -- Show part again if within range
+                part.CanCollide = true
+            end
+        end
+    end
+end
+
+-- Run the function every second to check part distances
+while true do
+    hideFarParts()
+    wait(99999999999)
+end
