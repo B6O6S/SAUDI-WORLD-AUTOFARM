@@ -1,0 +1,20 @@
+local scripts = {
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Void%20protection', -- Script 1
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Hide%20screen', -- Script 2
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Fall%20in%20the%20void', -- Script 3
+    'https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/Antiafk', -- Script 4
+}
+
+-- Execute each script once
+for _, url in ipairs(scripts) do
+    local success, result = pcall(function()
+        local script = game:HttpGet(url)
+        loadstring(script)()
+    end)
+
+    if not success then
+        warn("Error loading script from " .. url .. ": " .. result)
+    end
+    
+    wait(2) -- Wait for 2 seconds before executing the next script
+end
