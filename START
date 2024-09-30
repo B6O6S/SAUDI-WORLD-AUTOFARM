@@ -1,0 +1,42 @@
+local StarterGui = game:GetService("StarterGui")
+local player = game.Players.LocalPlayer
+
+-- Show the notification
+StarterGui:SetCore("SendNotification", {
+    Title = "B6O6S 👑"; -- The title of the notification
+    Text = "اركب سياره قبل لا تضغط تجميع فلوس."; -- The body of the notification
+    Duration = 5; -- Time the notification will stay (in seconds)
+})
+
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Create the Button
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 200, 0, 50)
+button.Position = UDim2.new(0.5, -100, 0.5, -25)
+button.Text = "جمع فلوس"
+button.BackgroundColor3 = Color3.new(1, 0, 0) -- Initial red background
+button.Parent = screenGui
+
+-- Rainbow Loop for the Button's Background
+local function rainbowLoop()
+    while true do
+        for i = 0, 255 do
+            local color = Color3.fromHSV(i / 255, 1, 1)
+            button.BackgroundColor3 = color
+            wait(0.1) -- Adjust the speed of the rainbow effect
+        end
+    end
+end
+
+-- Execute loadstring and destroy GUI on Button Click
+button.MouseButton1Click:Connect(function()
+    local scriptToExecute = game:HttpGet('https://raw.githubusercontent.com/B6O6S/SAUDI-WORLD-AUTOFARM/refs/heads/main/THE%20AUTOFARM')
+    loadstring(scriptToExecute)() -- Execute the loadstring
+    screenGui:Destroy() -- Destroy the GUI
+end)
+
+-- Start the rainbow loop
+rainbowLoop()
